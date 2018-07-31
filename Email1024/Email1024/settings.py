@@ -96,7 +96,7 @@ ROOT_URL = "https://cc.cbcb.us/"        # 这里需要更新到最新的地址
 
 FILES_STORE = 'teasure_src'         # 文件存储路径
 
-MAX_PAGES = 10              # 可手动设置最大爬取单个区最大页面数
+MAX_PAGES = 10              # 可手动设置最大爬取单个区最大页面数，相配多大就配多大
 BLOCK_INFO = {
     15: "亚洲有码",
     2: "亚洲无码",
