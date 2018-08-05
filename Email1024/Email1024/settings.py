@@ -112,9 +112,9 @@ AUTHOR_NAME = {
 }
                                     # 这里是用126邮箱做例子，并不局限126邮箱
 SMTP_HOST = "smtp.163.com"          # 发送邮件的smtp服务器
-SMTP_USER = "fantasygood@163.com"       # 用于登录smtp服务器的用户名，也就是发送者的邮箱
-SMTP_PWD = "lidong123"             # 授权码，和用户名user一起，用于登录smtp， 非邮箱密码
-SMTP_PORT = 25                      # smtp服务器SSL端口号，默认是465，具体是什么，网上一搜邮箱域名和他的smtp就知道了
-SMTP_SENDER = "fantasygood@163.com"      # 发送方的邮箱
-SMTP_TO_LIST = ["po382@aaedu.edu.pl"]     # 发送目标邮箱地址，是个list
+SMTP_USER = "111@163.com"       # 用于登录smtp服务器的用户名，也就是发送者的邮箱
+SMTP_PWD = "l1113"             # 授权码，和用户名user一起，用于登录smtp， 非邮箱密码
+SMTP_PORT = 465                      # smtp服务器SSL端口号，默认是465，具体是什么，网上一搜邮箱域名和他的smtp就知道了
+SMTP_SENDER = "111@163.com"      # 发送方的邮箱
+SMTP_TO_LIST = ["111@edu.pl"]     # 发送目标邮箱地址，是个list
 
