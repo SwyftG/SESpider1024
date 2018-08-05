@@ -3,7 +3,7 @@ import scrapy
 from bs4 import BeautifulSoup
 from scrapy import Request
 from ..items import Email1024Item
-from ..settings import SPIDER_NAME, ROOT_URL, BLOCK_INFO, MAX_PAGES
+from ..settings import SPIDER_NAME, ROOT_URL, BLOCK_INFO, MAX_PAGES,AUTHOR_NAME
 
 
 class EmailspiderSpider(scrapy.Spider):
@@ -51,8 +51,6 @@ class EmailspiderSpider(scrapy.Spider):
         img_list = soup.find_all('img')
         topic_img_list = list()
         image_count = 0
-        if topic_id == '3226843':
-            print("this")
         for item in img_list:
             if "src" not in item.attrs and "data-src" not in item.attrs:
                 continue
@@ -70,8 +68,17 @@ class EmailspiderSpider(scrapy.Spider):
                 image_count = image_count + 1
             else:
                 break
-
+        b_list= soup.find_all('th')
         a_list = soup.find_all('a')
+        author_name=''
+        for item in b_list :
+            for key in AUTHOR_NAME:
+                if key not in item.text :
+                    continue
+                else :
+                    author_name=key
+        if len(author_name) == 0:
+            return
         topic_torrent_url = ""
         for item in a_list:
             if "rmdown" in item.text:
@@ -82,7 +89,8 @@ class EmailspiderSpider(scrapy.Spider):
                                 'topic_img_list': topic_img_list,
                                 'topic_url': topic_url,
                                 'topic_id': topic_id,
-                                'block_name': block_name})
+                                'block_name': block_name,
+                                'author_name': author_name})
 
     def parse_torrent_page(self, response):
         content = response.body
@@ -93,6 +101,7 @@ class EmailspiderSpider(scrapy.Spider):
         topic_img_url = response.meta['topic_img_list']
         block_name = response.meta['block_name']
         topic_torrent_url = response.url
+        author_name=response.meta['author_name']
         reff_value = soup.findAll(attrs={'name': 'reff'})
         ref_value = soup.findAll(attrs={'name': 'ref'})
         torrent_download_url = topic_torrent_url.split('?')[0].replace('link', 'download') + "?reff=" + reff_value[0][
@@ -104,6 +113,7 @@ class EmailspiderSpider(scrapy.Spider):
         fileItem['topic_url'] = topic_url
         fileItem['block_name'] = block_name
         fileItem['topic_img_url'] = topic_img_url
+        fileItem['author_name']= author_name
         urlList = [torrent_download_url]
         for img_url in topic_img_url:
             urlList.append(img_url)
