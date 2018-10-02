@@ -14,5 +14,6 @@ class Email1024Item(scrapy.Item):
     topic_title = scrapy.Field()
     topic_img_url = scrapy.Field()
     block_name = scrapy.Field()
+    author_name = scrapy.Field()
     file_urls = scrapy.Field()
     file = scrapy.Field()
